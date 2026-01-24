@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HSBJK Video Studio</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Segoe UI, Arial, sans-serif;
+  color:#e5e7eb;
+  overflow:hidden;
+
+  /* CANADIAN BACKGROUND */
+  background:
+    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)),
+    url("https://images.unsplash.com/photo-1508264165352-258db2ebd59b");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
+
+/* ===== FULL PAGE EFFECT LAYER ===== */
+#effect-bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== MAPLE LEAVES ===== */
+.leaf{
+  position:absolute;
+  font-size:26px;
+  opacity:.9;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.25));
+  animation:leafFlow linear infinite;
+}
+
+@keyframes leafFlow{
+  from{
+    transform:translate(-10vw,-10vh) rotate(0deg);
+  }
+  to{
+    transform:translate(110vw,110vh) rotate(540deg);
+  }
+}
+
+/* ===== COLD AIR WIND ===== */
+.wind{
+  position:absolute;
+  width:160px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#e0f2fe,transparent);
+  opacity:.45;
+  animation:windMove linear infinite;
+}
+
+@keyframes windMove{
+  from{transform:translateX(-200px)}
+  to{transform:translateX(120vw)}
+}
+
+/* ---------- COMMON ---------- */
+button{
+  padding:12px 18px;
+  border:none;
+  background:rgba(15,23,42,.85);
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:15px;
+  transition:.3s;
+  box-shadow:0 0 12px rgba(148,163,184,.35);
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 22px rgba(148,163,184,.7);
+}
+
+/* ---------- HOME ---------- */
+.home{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+/* LOGO */
+.logo{
+  width:220px;
+  filter:drop-shadow(0 0 12px rgba(255,255,255,.35));
+  transition:.3s;
+}
+.logo:hover{transform:scale(1.05);}
+
+/* TITLE GLOW */
+.home h1{
+  font-size:40px;
+  margin:10px 0;
+  letter-spacing:1px;
+  color:#f8fafc;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.4),
+    0 0 18px rgba(148,163,184,.6),
+    0 0 30px rgba(56,189,248,.4);
+}
+
+/* SUBTITLE */
+.subtitle{
+  font-size:16px;
+  color:#cbd5f5;
+  text-shadow:
+    0 0 6px rgba(203,213,225,.5),
+    0 0 14px rgba(56,189,248,.35);
+}
+
+/* BUTTONS */
+.mode-buttons{
+  display:flex;
+  gap:30px;
+  margin-top:12px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .logo{width:180px;}
+  .mode-buttons{
+    flex-direction:column;
+    gap:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FULL PAGE EFFECT -->
+<div id="effect-bg"></div>
+
+<!-- HOME -->
+<div class="home">
+
+  <img src="logo.png" alt="HSBJK Logo" class="logo">
+
+  <h1>HSBJK Video Studio</h1>
+
+  <div class="subtitle">Watch • Edit • Create</div>
+
+  <div class="mode-buttons">
+    <button onclick="goToWatch()">▶ Watch Video</button>
+    <button onclick="goToEdit()">✂ Edit Video</button>
+  </div>
+
+</div>
+
+<script>
+function goToWatch(){
+  window.location.href="https://your-video-watching-website-link.com";
+}
+function goToEdit(){
+  window.location.href="https://your-video-editing-website-link.com";
+}
+
+/* ===== EFFECT ENGINE ===== */
+const bg=document.getElementById("effect-bg");
+
+/* CREATE MAPLE LEAF ANYWHERE */
+function createLeaf(){
+  const leaf=document.createElement("div");
+  leaf.className="leaf";
+  leaf.textContent="🍁";
+  leaf.style.left=Math.random()*120+"vw";
+  leaf.style.top=Math.random()*100+"vh";
+  leaf.style.fontSize=(Math.random()*14+18)+"px";
+  leaf.style.animationDuration=(Math.random()*6+8)+"s";
+  bg.appendChild(leaf);
+
+  setTimeout(()=>leaf.remove(),16000);
+}
+
+/* CREATE WIND ANYWHERE */
+function createWind(){
+  const wind=document.createElement("div");
+  wind.className="wind";
+  wind.style.top=Math.random()*100+"vh";
+  wind.style.animationDuration=(Math.random()*2+3)+"s";
+  bg.appendChild(wind);
+
+  setTimeout(()=>wind.remove(),6000);
+}
+
+/* DENSITY CONTROL */
+setInterval(createLeaf,200);   // many leaves
+setInterval(createWind,500);   // cold wind lines
+</script>
+
+</body>
+</html>
