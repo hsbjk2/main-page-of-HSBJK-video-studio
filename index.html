@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,75 +11,25 @@
 body{
   margin:0;
   font-family:Segoe UI, Arial, sans-serif;
-  color:#e5e7eb;
-  overflow:hidden;
-
-  /* CANADIAN BACKGROUND */
-  background:
-    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)),
-    url("https://images.unsplash.com/photo-1508264165352-258db2ebd59b");
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-}
-
-/* ===== FULL PAGE EFFECT LAYER ===== */
-#effect-bg{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-
-/* ===== MAPLE LEAVES ===== */
-.leaf{
-  position:absolute;
-  font-size:26px;
-  opacity:.9;
-  filter:drop-shadow(0 0 6px rgba(255,255,255,.25));
-  animation:leafFlow linear infinite;
-}
-
-@keyframes leafFlow{
-  from{
-    transform:translate(-10vw,-10vh) rotate(0deg);
-  }
-  to{
-    transform:translate(110vw,110vh) rotate(540deg);
-  }
-}
-
-/* ===== COLD AIR WIND ===== */
-.wind{
-  position:absolute;
-  width:160px;
-  height:2px;
-  background:linear-gradient(90deg,transparent,#e0f2fe,transparent);
-  opacity:.45;
-  animation:windMove linear infinite;
-}
-
-@keyframes windMove{
-  from{transform:translateX(-200px)}
-  to{transform:translateX(120vw)}
+  background:#f4f6f8;
+  color:#222;
 }
 
 /* ---------- COMMON ---------- */
 button{
   padding:12px 18px;
   border:none;
-  background:rgba(15,23,42,.85);
+  background:#1e293b;
   color:#fff;
   border-radius:6px;
   cursor:pointer;
+  transition:all .25s ease;
   font-size:15px;
-  transition:.3s;
-  box-shadow:0 0 12px rgba(148,163,184,.35);
 }
 
 button:hover{
+  box-shadow:0 0 12px rgba(30,41,59,.6);
   transform:translateY(-2px);
-  box-shadow:0 0 22px rgba(148,163,184,.7);
 }
 
 /* ---------- HOME ---------- */
@@ -90,49 +41,51 @@ button:hover{
   align-items:center;
   gap:18px;
   text-align:center;
-  position:relative;
-  z-index:1;
 }
 
-/* LOGO */
+/* BIGGER LOGO */
 .logo{
   width:220px;
-  filter:drop-shadow(0 0 12px rgba(255,255,255,.35));
-  transition:.3s;
+  transition:.3s ease;
 }
-.logo:hover{transform:scale(1.05);}
 
-/* TITLE GLOW */
+.logo:hover{
+  transform:scale(1.05);
+  filter:drop-shadow(0 0 14px rgba(0,0,0,0.35));
+}
+
+/* FONT COLOR CHANGED */
 .home h1{
   font-size:40px;
   margin:10px 0;
   letter-spacing:1px;
-  color:#f8fafc;
-  text-shadow:
-    0 0 8px rgba(255,255,255,.4),
-    0 0 18px rgba(148,163,184,.6),
-    0 0 30px rgba(56,189,248,.4);
+  color:#0f172a;
 }
 
-/* SUBTITLE */
+/* SUMMARY (ONLY ADDITION) */
+.summary{
+  font-size:15px;
+  color:#334155;
+  max-width:520px;
+  line-height:1.5;
+}
+
+/* Optional subtitle color */
 .subtitle{
+  color:#475569;
   font-size:16px;
-  color:#cbd5f5;
-  text-shadow:
-    0 0 6px rgba(203,213,225,.5),
-    0 0 14px rgba(56,189,248,.35);
 }
 
-/* BUTTONS */
 .mode-buttons{
   display:flex;
   gap:30px;
   margin-top:12px;
 }
 
-/* MOBILE */
 @media(max-width:600px){
-  .logo{width:180px;}
+  .logo{
+    width:180px;
+  }
   .mode-buttons{
     flex-direction:column;
     gap:15px;
@@ -143,18 +96,24 @@ button:hover{
 
 <body>
 
-<!-- FULL PAGE EFFECT -->
-<div id="effect-bg"></div>
-
-<!-- HOME -->
+<!-- HOME / LANDING PAGE -->
 <div class="home">
 
+  <!-- LOGO -->
   <img src="logo.png" alt="HSBJK Logo" class="logo">
 
+  <!-- TITLE -->
   <h1>HSBJK Video Studio</h1>
 
+  <!-- SHORT SUMMARY (ONLY ADDITION) -->
+  <div class="summary">
+    A simple and user-friendly platform to watch videos and edit them easily in one place.
+  </div>
+
+  <!-- OPTIONAL SUBTITLE -->
   <div class="subtitle">Watch • Edit • Create</div>
 
+  <!-- BUTTONS -->
   <div class="mode-buttons">
     <button onclick="goToWatch()">▶ Watch Video</button>
     <button onclick="goToEdit()">✂ Edit Video</button>
@@ -163,44 +122,14 @@ button:hover{
 </div>
 
 <script>
+/* 🔗 PUT YOUR WEBSITE LINKS HERE */
 function goToWatch(){
-  window.location.href="https://your-video-watching-website-link.com";
+  window.location.href = "https://hsbjk2.github.io/Video-watching-Page/";
 }
+
 function goToEdit(){
-  window.location.href="https://your-video-editing-website-link.com";
+  window.location.href = "https://hsbjk2.github.io/Edit-video-/";
 }
-
-/* ===== EFFECT ENGINE ===== */
-const bg=document.getElementById("effect-bg");
-
-/* CREATE MAPLE LEAF ANYWHERE */
-function createLeaf(){
-  const leaf=document.createElement("div");
-  leaf.className="leaf";
-  leaf.textContent="🍁";
-  leaf.style.left=Math.random()*120+"vw";
-  leaf.style.top=Math.random()*100+"vh";
-  leaf.style.fontSize=(Math.random()*14+18)+"px";
-  leaf.style.animationDuration=(Math.random()*6+8)+"s";
-  bg.appendChild(leaf);
-
-  setTimeout(()=>leaf.remove(),16000);
-}
-
-/* CREATE WIND ANYWHERE */
-function createWind(){
-  const wind=document.createElement("div");
-  wind.className="wind";
-  wind.style.top=Math.random()*100+"vh";
-  wind.style.animationDuration=(Math.random()*2+3)+"s";
-  bg.appendChild(wind);
-
-  setTimeout(()=>wind.remove(),6000);
-}
-
-/* DENSITY CONTROL */
-setInterval(createLeaf,200);   // many leaves
-setInterval(createWind,500);   // cold wind lines
 </script>
 
 </body>
